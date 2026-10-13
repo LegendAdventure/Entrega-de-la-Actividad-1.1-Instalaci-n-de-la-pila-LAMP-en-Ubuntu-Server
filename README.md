@@ -113,4 +113,4 @@ AuthUserFile /var/www/html/.htpasswd
 Require valid-user
 ```
 ![Comando con.htaccess](./img/htaccess.png)  
-![](./img/PaginaAccess.png)
+![Pagina Access](./img/PaginaAccess.png)
