@@ -9,8 +9,8 @@ Documento técnico correspondiente al despliegue de una arquitectura web con un 
 Para la realización de esta práctica se ha provisionado una máquina virtual (instancia EC2) en la nube de Amazon Web Services utilizando los siguientes parámetros:
 
 * **Nombre de la instancia:** `prueba01.1`
-* **Tipo de instancia:** `t3.small` (1 vCPU, 2 GiB de RAM)
-* **Sistema Operativo / AMI:** Ubuntu Server 22.04 LTS (HVM), SSD Volume Type (64 bits x86)
+* **Tipo de instancia:** `t3.small` (8 vCPU, 8 GiB de RAM)
+* **Sistema Operativo / AMI:** Ubuntu Server 22.04 LTS
 * **Dirección IP pública / elástica:** `34.235.203.186`
 * **Usuario de conexión SSH:** `ubuntu`
 * **Clave de acceso:** `vockey.pem` (proporcionada por AWS Academy Learner Lab)
@@ -35,7 +35,7 @@ ssh -i "vockey.pem" ubuntu@34.235.203.186
 
 
 ### 2.2. Script de Automatización de LAMP (install_lamp.sh)
-El script actualiza los repositorios del sistema e instala de forma desatendida Apache, MySQL Server y PHP junto con sus módulos esenciales (libapache2-mod-php, php-mysql, php-cli, etc.).
+El script actualiza los repositorios del sistema e instala de forma desatendida Apache, MySQL Server y PHP junto con sus módulos esenciales (libapache2-mod-php, php-mysql, php-cli y un largo etc.).
 
 ```bash
 #!/bin/bash
@@ -89,4 +89,19 @@ sudo wget -O /var/www/html/adminer/index.php [https://www.adminer.org/latest.php
 
 # Instalación de GoAccess
 sudo apt install -y goaccess
+```
+---
+## 4. Control de Acceso a un Directorio con .htaccess
+
+Para restringir el acceso a determinadas rutas o directorios web del servidor Apache, se han habilitado los ficheros de configuración .htaccess.
+
+  Modificamos la configuración por defecto de Apache (/etc/apache2/sites-available/000-default.conf) para permitir sobreescrituras en el directorio raíz /var/www/html.
+
+  Creamos un fichero .htaccess protegido mediante credenciales cifradas con htpasswd.
+
+```bash
+AuthType Basic
+AuthName "Área Restringida - Acceso Autorizado"
+AuthUserFile /var/www/html/.htpasswd
+Require valid-user
 ```
