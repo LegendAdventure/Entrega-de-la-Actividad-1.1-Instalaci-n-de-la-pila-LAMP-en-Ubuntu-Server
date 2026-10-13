@@ -1,7 +1,5 @@
 # Práctica 1.1: Instalación de la pila LAMP en una instancia de AWS y herramientas adicionales
 
-Documento técnico correspondiente al despliegue de una arquitectura web con un único servidor en AWS para el curso de **Despliegue de Aplicaciones Web (Curso 2026/2027)**.
-
 ---
 
 ## 1. Datos de la Infraestructura en AWS
@@ -19,6 +17,8 @@ Para la realización de esta práctica se ha provisionado una máquina virtual (
   * **HTTP:** Protocolo TCP, Puerto `80`, Origen `0.0.0.0/0`
   * **HTTPS:** Protocolo TCP, Puerto `443`, Origen `0.0.0.0/0`
 
+  ![Instancia EC2 en funcionamiento](./img/instancia.png)
+
 ---
 
 ## 2. Descripción de la Instalación de la Pila LAMP
@@ -32,6 +32,8 @@ Una vez arrancado el laboratorio en AWS Academy y creada la instancia con la IP 
 chmod 400 vockey.pem
 ssh -i "vockey.pem" ubuntu@34.235.203.186
 ```
+
+![Conexión exitosa por SSH](./img/conexion_exitosaSSH.png)
 
 
 ### 2.2. Script de Automatización de LAMP (install_lamp.sh)
@@ -60,14 +62,19 @@ sudo systemctl restart mysql
 sudo systemctl enable mysql
 ```
 
+![Ejecución del script LAMP](./img/lamp.png)
+![Página de inicio web del servidor LAMP](./img/inicio.png)
 ## 3. Instalación de Herramientas de Gestión y Monitorización
+![Ejecución de la instalación de herramientas](./img/tools.png)
 
 Para complementar la administración del servidor web y las bases de datos, se han instalado herramientas adicionales mediante el script install_tools.sh.
 ### 3.1. phpMyAdmin
 
 phpMyAdmin se instala para permitir una gestión visual y sencilla de las bases de datos MySQL a través de la web.
 
-    Se configuran las dependencias y se enlaza el directorio de phpMyAdmin al entorno de Apache.
+Se configuran las dependencias y se enlaza el directorio de phpMyAdmin al entorno de Apache.
+
+![Interfaz de phpMyAdmin funcionando](./img/phpAdmin.png)
 
 ### 3.2. Adminer
 
@@ -90,7 +97,7 @@ sudo wget -O /var/www/html/adminer/index.php [https://www.adminer.org/latest.php
 # Instalación de GoAccess
 sudo apt install -y goaccess
 ```
----
+![Analizador de logs GoAccess en ejecución](./img/goaccess.png)---
 ## 4. Control de Acceso a un Directorio con .htaccess
 
 Para restringir el acceso a determinadas rutas o directorios web del servidor Apache, se han habilitado los ficheros de configuración .htaccess.
@@ -105,3 +112,5 @@ AuthName "Área Restringida - Acceso Autorizado"
 AuthUserFile /var/www/html/.htpasswd
 Require valid-user
 ```
+![Comando con.htaccess](./img/htaccess.png)  
+![](./img/PaginaAccess.png)

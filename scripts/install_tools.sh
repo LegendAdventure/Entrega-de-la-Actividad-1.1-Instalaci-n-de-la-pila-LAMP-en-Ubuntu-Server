@@ -17,6 +17,11 @@ fi
 # Instalación de phpMyAdmin y dependencias
 apt install -y phpmyadmin php-mbstring php-zip php-gd php-json php-curl
 
+# Configuración y enlace automático de phpMyAdmin en Apache
+ln -sf /etc/phpmyadmin/apache.conf /etc/apache2/conf-available/phpmyadmin.conf
+a2enconf phpmyadmin
+systemctl reload apache2
+
 # 2. Instalación de Adminer
 mkdir -p /var/www/html/adminer
 wget -O /var/www/html/adminer/index.php https://www.adminer.org/latest.php
