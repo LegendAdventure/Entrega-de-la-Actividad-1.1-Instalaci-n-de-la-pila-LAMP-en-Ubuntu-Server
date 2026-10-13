@@ -1,0 +1,16 @@
+# Variables de entorno y secretos
+.env
+.env.*
+
+# Claves privadas o certificados que puedan colarse por error
+*.pem
+*.ppk
+
+# Archivos del editor de código y del sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Archivos de log temporales
+*.log

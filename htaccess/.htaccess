@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Área Restringida - Acceso Autorizado"
+AuthUserFile /var/www/html/.htpasswd
+Require valid-user
